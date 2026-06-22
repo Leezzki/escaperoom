@@ -161,7 +161,7 @@ function showLevel3Summary(){
   `;
   area.appendChild(summary);
   const label = document.createElement('label'); label.className='block mt-3'; label.textContent='Enter the code:';
-  const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='e.g. 51'; label.appendChild(input); area.appendChild(label);
+  const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='e.g. 42'; label.appendChild(input); area.appendChild(label);
   const submit = createButton('Submit', ()=>{
     if(input.value.trim() === '51'){ playCorrect(); showMessage(area,'The forest clock spins and reveals a hidden shop sign.'); setTimeout(()=>showLevel(4),900); }
     else { playWrong(); showMessage(area,'The forest clock ticks backwards. Look again at the correct answers.',false); }
@@ -180,7 +180,7 @@ function renderLevel4(main){
       <li>Eggplant = 10 baht</li>
     </ul>
     <p class="mt-2">The customer buys: Mushroom, Raspberry, Lime, Egg, Eggplant.</p>
-    <p class="mt-2">Add the total cost together, look carefully at the numbers or the items. The secret code could be a number or a word.</p>`;
+    <p class="mt-2">Look carefully at the numbers or the items. The secret code could be a number or a word.</p>`;
   const label = document.createElement('label'); label.className='block mt-3'; label.textContent='Enter the secret code:';
   const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='Type the hidden code'; label.appendChild(input); main.appendChild(label);
   const submit = createButton('Submit', ()=>{
@@ -195,10 +195,10 @@ function renderLevel5(main){
   main.innerHTML = `<h2 class="font-bold huge">Level 5 — Year 3 Bear Memories</h2>
     <p class="mt-2">Answer the Year 3 memory questions. Then use the clue to make a word. Clue: Use the LAST letter of each correct answer. Make a word.</p>`;
   const questions = [
-    {q:'What animal is hidden in our class name?', opts:['Cub','Owl','Fox'], correct:0},
+    {q:'What is a baby tiger called?', opts:['Cub','Kitten','Baby'], correct:0},
     {q:'Which Roman word means a large area ruled by one power?', opts:['Empire','Villa','Legion'], correct:0},
-    {q:'What do we show when we keep trying, even when something is difficult?', opts:['Resilience','Honour','Luck'], correct:1},
-    {q:'What do we say when working well together?', opts:['Teamwork','Trust','Kindness'], correct:1}
+    {q:'What do you use to hit a nail', opts:['Hamerr','Hammer','Hammar'], correct:1},
+    {q:'What do we say when we believe someone?', opts:['Kindness','Trust','Teamwork'], correct:1}
   ];
   const area = document.createElement('div'); area.id='lvl5Area'; main.appendChild(area);
   questions.forEach((qt,idx)=>{
@@ -215,7 +215,7 @@ function renderLevel5(main){
     area.appendChild(card);
   });
 
-  const hint = document.createElement('p'); hint.className='mt-4'; hint.textContent='After answering, use the LAST letter of each correct answer to make the code.';
+  const hint = document.createElement('p'); hint.className='mt-4'; hint.textContent='After answering, use the letters of each correct answer to make a name, the name is 4 letters.';
   area.appendChild(hint);
   const label = document.createElement('label'); label.className='block mt-3'; label.textContent='Enter the bear\'s name:';
   const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='Type the name'; label.appendChild(input); area.appendChild(label);
@@ -242,7 +242,7 @@ function renderLevel6(main){
 
 function showLevel6AnswerInput(main){
   const label = document.createElement('label'); label.className='block mt-3'; label.textContent='Enter the code:';
-  const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='e.g. 4132'; label.appendChild(input); main.appendChild(label);
+  const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='e.g. 1234'; label.appendChild(input); main.appendChild(label);
   const submit = createButton('Submit', ()=>{
     if(input.value.trim() === '4132'){ playCorrect(); showMessage(main,'Bert has made the perfect honey toast. One final forest door appears.'); setTimeout(()=>showLevel(7),900); }
     else { playWrong(); showMessage(main,'Bert\'s toast is still very strange. Think about what should happen first, second, third and last.',false); }
@@ -252,7 +252,7 @@ function showLevel6AnswerInput(main){
 // Final
 function renderFinal(main){
   main.innerHTML = `<h2 class="font-bold huge">Final Door — Riddle</h2>
-    <p class="mt-2">I am not a number. I was hidden in your memories. I woke up when you looked at the last letters. I am the bear you rescued. Who am I?</p>`;
+    <p class="mt-2">I am not a number. I was hidden in your memories. I woke up when you looked at the last letters. Who am I?</p>`;
   const label = document.createElement('label'); label.className='block mt-3'; label.textContent='Enter the final password:';
   const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='Type the final password'; label.appendChild(input); main.appendChild(label);
   const submit = createButton('Submit', ()=>{
