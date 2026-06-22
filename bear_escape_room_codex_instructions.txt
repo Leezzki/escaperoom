@@ -1,0 +1,556 @@
+BEAR ESCAPE ROOM – CODEX BUILD INSTRUCTIONS
+============================================
+
+Project title:
+Bear Rescue: Escape the Year 3 Den
+
+Goal:
+Create a simple interactive browser-based escape room for Year 3 students. It should run well on iPads, feel fun and polished, and work as a single-page website. Students work in pairs or groups of 3 and solve each level by entering a secret code or answering questions. Correct answers unlock the next level.
+
+Audience:
+Year 3 children, around 7–8 years old.
+Class size: 19 students.
+Expected activity length: 45 minutes.
+Theme: Bears / forest / Year 3 memories.
+Difficulty: 60% academic, 40% fun.
+
+Important:
+Do not make the answers too obvious. Some children are very smart, so the clues should require careful reading and problem solving.
+
+Preferred build:
+- Single HTML file if possible, with embedded CSS and JavaScript.
+- Or simple HTML/CSS/JS files if cleaner.
+- No login.
+- No database.
+- No external setup required.
+- It should work when opened locally in a browser and also be easy to host on Netlify.
+- Make it iPad-friendly and touch-friendly.
+- Use large buttons and input boxes.
+- Add simple animations, sounds optional but not required.
+- Add a progress indicator showing Level 1 to Level 6.
+- Add “Access Denied” / “Try again” feedback for wrong codes.
+- Add celebration/confetti at the end if easy.
+
+Styling:
+Use a fun child-friendly bear/forest theme.
+
+Suggested visual style:
+- Warm forest background.
+- Bear paw prints.
+- Cave / den cards.
+- Honey pot icons.
+- Rounded cards.
+- Large clear fonts.
+- Soft browns, greens, yellows, cream.
+- Big friendly buttons.
+- Use emojis if useful: 🐻 🍯 🌲 🐾 🔐
+
+CSS:
+Tailwind is fine if using CDN, but plain CSS is also fine.
+If using Tailwind, use it only through the CDN for simplicity.
+The site must still be simple enough for me to edit later.
+
+Suggested layout:
+- Main centered card.
+- Header with title.
+- Story text.
+- Level number.
+- Challenge content.
+- Answer input / buttons.
+- Submit button.
+- Feedback message.
+- Progress bar or paw-print progress tracker.
+
+Opening Story Screen
+--------------------
+
+Title:
+Bear Rescue: Escape the Year 3 Den
+
+Story text:
+The Year 3 Bear Cubs are trapped inside the forest den. The Year 4 gate is locked, and the only way out is to prove you are ready for your next adventure.
+
+You must use your problem solving skills to find the secret codes or clues and enter them to move on to the next level.
+
+Work together. Read carefully. Think like detectives.
+
+Button:
+Start the Bear Rescue
+
+Level 1 – Roman Numeral Bear Code
+---------------------------------
+
+Theme:
+A bear has scratched Roman numerals into the cave wall.
+
+Screen text:
+A bear has scratched three Roman numerals onto the cave wall:
+
+IX
+XIV
+VI
+
+Clue:
+The code is a 2 digit number.
+Add together the two numbers that make the biggest total.
+
+Input label:
+Enter the code:
+
+Correct answer:
+23
+
+Reasoning:
+IX = 9
+XIV = 14
+VI = 6
+The two biggest numbers are 14 and 9.
+14 + 9 = 23.
+
+Wrong answer feedback:
+The cave wall rumbles, but the door stays closed. Check the Roman numerals carefully.
+
+Correct feedback:
+The cave door opens! A paw print points deeper into the forest.
+
+Then move to Level 2.
+
+Level 2 – Fraction Honey Pots
+-----------------------------
+
+Theme:
+The bears have found honey pots and forest food.
+
+Screen text:
+Solve the three fraction challenges. Then enter the code below.
+
+Question 1:
+The bears found 18 honey pots.
+1/3 were golden.
+How many were golden?
+
+Question 2:
+There are 20 berries.
+1/4 are blueberries.
+How many are blueberries?
+
+Question 3:
+A bear collected 15 fish.
+2/5 were salmon.
+How many were salmon?
+
+Instruction:
+What is the code?
+
+Input label:
+Enter the code:
+
+Correct answer:
+656
+
+Reasoning:
+1/3 of 18 = 6
+1/4 of 20 = 5
+2/5 of 15 = 6
+Code = 656
+
+Important:
+Do not say “put the answers together” on the student screen. The instruction should only say “What is the code?” so they have to infer it.
+
+Wrong answer feedback:
+The honey pot is still locked. Check each fraction carefully.
+
+Correct feedback:
+The honey pot opens and reveals a forest clock.
+
+Then move to Level 3.
+
+Level 3 – Time in the Forest
+----------------------------
+
+Theme:
+The bears must follow the forest timetable.
+
+This level should be multiple choice, one question at a time.
+
+Important behaviour:
+If students get Question 2 or Question 3 wrong, reset them back to Question 1.
+This stops them from spamming random answers.
+If they get Question 1 wrong, they simply stay on Question 1.
+
+Also important:
+After they answer all 3 questions correctly, show all three questions and the correct answers together on the screen. This is so they can work out the final code.
+
+Question 1:
+The bear wakes up at 7:25.
+What time is this?
+
+Options:
+A) 25 minutes past 7 [correct]
+B) 25 minutes to 7
+C) 7 minutes past 25
+
+Question 2:
+The cubs leave the cave at 3:45.
+What time is this?
+
+Options:
+A) Quarter past 3
+B) Quarter to 4 [correct]
+C) Half past 3
+
+Question 3:
+The picnic starts at 2:10 and lasts 30 minutes.
+What time does it finish?
+
+Options:
+A) 2:30
+B) 2:40 [correct]
+C) 3:10
+
+After all 3 correct:
+Show a summary card:
+
+Correct answers:
+1. 7:25 = 25 minutes past 7
+2. 3:45 = quarter to 4
+3. 2:10 + 30 minutes = 2:40
+
+Final clue:
+Add the hour from answer 1, the hour from answer 2, and the final minutes from answer 3.
+
+Input label:
+Enter the code:
+
+Correct answer:
+51
+
+Reasoning:
+Answer 1 gives hour 7.
+Answer 2 gives hour 4.
+Answer 3 gives final minutes 40.
+7 + 4 + 40 = 51.
+
+Wrong answer feedback on final code:
+The forest clock ticks backwards. Look again at the correct answers.
+
+Correct feedback:
+The forest clock spins and reveals a hidden shop sign.
+
+Then move to Level 4.
+
+Level 4 – Bear Shop Secret Code
+-------------------------------
+
+Theme:
+The bears visit the forest shop.
+
+Screen text:
+Welcome to the Bear Shop.
+
+Price list:
+Mushroom = 12 baht
+Raspberry = 8 baht
+Lime = 5 baht
+Egg = 3 baht
+Eggplant = 10 baht
+
+The customer buys:
+Mushroom
+Raspberry
+Lime
+Egg
+Eggplant
+
+Instruction:
+Add the total cost together, look carefully at the numbers or the items. The secret code could be a number or a word.
+
+Input label:
+Enter the secret code:
+
+Correct answer:
+MRLEE
+
+Accept:
+MRLEE
+mrlee
+MrLee
+mr lee should also be accepted if easy, by removing spaces and converting to uppercase before checking.
+
+Reasoning:
+The total cost is 38, but that is not the secret code.
+The first letters of the items spell:
+Mushroom = M
+Raspberry = R
+Lime = L
+Egg = E
+Eggplant = E
+Code = MRLEE
+
+Important:
+Do NOT directly tell students to look at the first letter. That makes it too easy.
+
+Wrong answer feedback:
+The shopkeeper bear shakes his head. The secret code might not be the total cost.
+
+Correct feedback:
+The shopkeeper whispers, “You found the hidden word.”
+
+Then move to Level 5.
+
+Level 5 – Year 3 Bear Memories
+------------------------------
+
+Theme:
+The bear cubs need to remember their Year 3 adventure.
+
+This should use multiple choice questions. The code is made from the LAST letter of each correct answer.
+
+Screen text:
+Answer the Year 3 memory questions. Then use the clue to make a word.
+
+Clue:
+Use the LAST letter of each correct answer.
+Make a word.
+
+Important:
+The correct answers should create the code BERT.
+To do this, the correct answers must end in:
+B, E, R, T.
+
+Use these questions:
+
+Question 1:
+What animal is hidden in our class name?
+
+Options:
+A) Cub [correct, ends in B]
+B) Owl
+C) Fox
+
+Teacher note:
+Our actual class is Barn Owls, but for this puzzle the answer “Cub” links to the bear theme. If this feels too confusing, change this question. The important thing is the correct answer must end in B.
+
+Alternative Question 1 if preferred:
+What is the baby bear called?
+A) Cub [correct]
+B) Chick
+C) Kitten
+
+Question 2:
+Which Roman word means a large area ruled by one power?
+
+Options:
+A) Empire [correct, ends in E]
+B) Villa
+C) Legion
+
+Question 3:
+What do we show when we keep trying, even when something is difficult?
+
+Options:
+A) Resilience [wrong, ends E]
+B) Honour [correct, ends R]
+C) Luck
+
+Teacher note:
+I originally wanted Resilience, but it ends with E, not R. To make the BERT code work using last letters, use “Honour” or “Character”. If using UK spelling, Honour ends in R.
+
+Question 4:
+What do we say when working well together?
+
+Options:
+A) Teamwork [wrong, ends K]
+B) Trust [correct, ends T]
+C) Kindness
+
+Teacher note:
+I originally wanted Teamwork, but it ends with K, not T. To make the BERT code work using last letters, use “Trust”.
+
+After questions:
+Students should take the last letter of each correct answer:
+Cub = B
+Empire = E
+Honour = R
+Trust = T
+
+Code:
+BERT
+
+Input label:
+Enter the bear’s name:
+
+Correct answer:
+BERT
+
+Accept lowercase too.
+
+Wrong answer feedback:
+The bear name is hiding at the end of the answers. Look at the last letters.
+
+Correct feedback:
+Bert the Bear wakes up and points to a set of mixed-up instructions.
+
+Then move to Level 6.
+
+Level 6 – Algorithm Mistake
+---------------------------
+
+Theme:
+Bert the Bear has written an algorithm, but it is wrong.
+
+Screen text:
+Bert wants to make honey toast, but his algorithm has a mistake.
+
+Original algorithm:
+1. Put bread on the plate.
+2. Eat the toast.
+3. Spread honey on the bread.
+4. Toast the bread.
+
+Question:
+What is the mistake?
+
+Options:
+A) The bear should eat the toast first.
+B) The steps are in the wrong order. [correct]
+C) The bear forgot the plate.
+D) Honey cannot go on toast.
+
+After selecting correct answer:
+Show this instruction:
+Put the original step numbers into the correct order.
+
+Correct order should be:
+4. Toast the bread.
+1. Put bread on the plate.
+3. Spread honey on the bread.
+2. Eat the toast.
+
+Input label:
+Enter the code:
+
+Correct answer:
+4132
+
+Reasoning:
+The correct order uses the original step numbers:
+4, 1, 3, 2.
+
+Wrong answer feedback:
+Bert’s toast is still very strange. Think about what should happen first, second, third and last.
+
+Correct feedback:
+Bert has made the perfect honey toast. One final forest door appears.
+
+Then move to Final Door.
+
+Final Door – Riddle
+-------------------
+
+Theme:
+The final forest gate.
+
+Screen text:
+You have solved Roman numerals, fractions, time, money, memories and algorithms.
+
+Now answer the final riddle to open the Year 4 gate.
+
+Riddle:
+I am not a number.
+I was hidden in your memories.
+I woke up when you looked at the last letters.
+I am the bear you rescued.
+Who am I?
+
+Input label:
+Enter the final password:
+
+Correct answer:
+BERT
+
+Accept lowercase too.
+
+Wrong answer feedback:
+Think back to the memory level. Who did you rescue?
+
+Correct final screen:
+🎉 You escaped the Year 3 Den! 🎉
+
+Bert the Bear is free, and the Year 4 gate is open.
+
+Congratulations, Bear Cubs.
+You used teamwork, memory, maths, reading and computing skills to complete the final mission.
+
+You are officially ready for Year 4!
+
+Add a button:
+Play Again
+
+Optional:
+Add confetti animation on this final screen.
+
+Technical Requirements
+----------------------
+
+JavaScript:
+- Store the current level in a variable.
+- Do not need to save progress after refresh.
+- Use functions like showLevel(levelNumber), checkLevel1(), checkLevel2(), etc.
+- Inputs should ignore case where the answer is a word.
+- Trim spaces from inputs.
+- For Level 4, remove spaces and uppercase the answer before checking.
+- For Level 5 and Final Door, uppercase the answer before checking.
+- For numerical codes, trim spaces and compare exact number strings.
+
+Level 3 reset logic:
+- Track current time question index.
+- If Q1 wrong: stay on Q1.
+- If Q2 or Q3 wrong: reset back to Q1 and show message such as:
+  “Oh no! The forest clock reset. Start again from Question 1.”
+- When all three are correct, show the answer summary and final code input.
+
+Accessibility / child-friendly design:
+- Font size should be large.
+- Buttons should be big enough for iPad tapping.
+- Avoid tiny text.
+- Keep each screen uncluttered.
+- Include clear feedback.
+- Do not require typing too much.
+
+Suggested file names:
+index.html
+or:
+index.html
+style.css
+script.js
+
+If building as one file, include CSS in a <style> tag and JS in a <script> tag.
+
+Deployment:
+- The final project should be easy to deploy on Netlify.
+- It should also work locally by opening index.html.
+- I may create a QR code linking to the hosted Netlify page.
+
+Testing checklist:
+1. Start button opens Level 1.
+2. Level 1 accepts 23 only.
+3. Level 2 accepts 656 only.
+4. Level 3 resets to Q1 if Q2 or Q3 is wrong.
+5. Level 3 shows all correct answers before asking for code 51.
+6. Level 4 accepts MRLEE in different cases.
+7. Level 5 uses last letters and accepts BERT.
+8. Level 6 accepts 4132.
+9. Final riddle accepts BERT.
+10. Final celebration screen appears.
+11. Page looks good on an iPad.
+12. Page is simple enough for children to use without adult help.
+
+Optional enhancements:
+- Add bear paw progress tracker.
+- Add small “teacher answers” hidden in comments, not displayed on the page.
+- Add light sound effects for correct/wrong answers.
+- Add confetti on final screen.
+- Add a forest background pattern.
+- Add animations like a shaking lock on wrong answer.
+- Add a bouncing bear emoji on correct answers.

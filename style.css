@@ -1,0 +1,8 @@
+/* Small additional styles for child-friendly layout */
+body { font-family: 'Arial', sans-serif; background: linear-gradient(#FAF7F0,#EAF6EC); }
+.card { max-width: 900px; margin: 24px auto; padding: 20px; border-radius: 16px; background: #fff8ef; box-shadow: 0 8px 24px rgba(30,30,30,0.08);} 
+.big { font-size: 1.4rem; }
+.huge { font-size: 2rem; }
+.paw { font-size: 1.6rem; }
+.kbd { background:#fff3d6; padding:6px 10px; border-radius:8px; }
+@media (max-width:768px){ .card{ margin:12px; padding:16px } .huge{font-size:1.6rem} }

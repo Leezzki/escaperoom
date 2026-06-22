@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bear Rescue: Escape the Year 3 Den</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="p-4">
+  <div class="card" id="app">
+    <header class="flex items-center justify-between mb-4">
+      <div>
+        <h1 class="huge font-bold">🐻 Bear Rescue: Escape the Year 3 Den</h1>
+        <p class="text-sm text-gray-600">Work together. Read carefully. Think like detectives.</p>
+      </div>
+      <div id="progress" class="text-right">
+        <div class="text-sm">Progress</div>
+        <div id="paws" class="flex gap-1 mt-1"></div>
+      </div>
+    </header>
+
+    <main id="mainContent"></main>
+
+    <footer class="mt-6 text-center text-sm text-gray-600">Tips: Use large buttons and keep screens simple for iPad.</footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
