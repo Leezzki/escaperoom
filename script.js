@@ -124,7 +124,7 @@ function renderLevel2(main){
       <li>A bear collected 15 fish. 2/5 were salmon. How many were salmon?</li>
     </ol>`;
   const label = document.createElement('label'); label.className='block mt-3'; label.textContent='Enter the code:';
-  const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='e.g. 656';
+  const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='e.g. 123';
   label.appendChild(input); main.appendChild(label);
   const submit = createButton('Submit', ()=>{
     const val = input.value.trim();
@@ -237,7 +237,7 @@ const level5State = { currentQ: 0 };
 
 function renderLevel5(main){
   main.innerHTML = `<h2 class="font-bold huge">Level 5 — Year 3 Bear Memories</h2>
-    <p class="mt-2">Answer each memory question. Use the <strong>last letter</strong> of each correct answer to spell a 4-letter bear name.</p>
+    <p class="mt-2">Answer each memory question. Use the letters of each correct answer to spell a 4-letter bear name. Look carefully.</p>
     <div id="lvl5Area" class="mt-3"></div>`;
   level5State.currentQ = 0;
   renderLevel5Question();
@@ -301,12 +301,12 @@ function renderLevel5WordPuzzle(area){
   summary.className = 'p-4 bg-green-50 rounded-lg';
   summary.innerHTML = `
     <h3 class="font-bold text-green-800">All memory questions answered! 🐾</h3>
-    <p class="mt-2">Now use the <strong>last letter</strong> of each correct answer to spell a name:</p>
+    <p class="mt-2">Now use the letters of each correct answer to spell a name, it is 4 letters:</p>
     <ul class="mt-2 ml-4 list-disc text-lg">
-      <li>Cu<strong>b</strong></li>
-      <li>Empir<strong>e</strong></li>
-      <li>Hamme<strong>r</strong></li>
-      <li>Trus<strong>t</strong></li>
+      <li>Cub</li>
+      <li>Empire</li>
+      <li>Hammer</li>
+      <li>Trust</li>
     </ul>
   `;
   area.appendChild(summary);
