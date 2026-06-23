@@ -3,22 +3,58 @@
 
 const state = { level: 0, level3_q: 1, level3_answers: [null,null,null] };
 
-// Sound helpers (WebAudio simple effects)
+// Sound helpers (WebAudio — bear/forest theme)
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 const audioCtx = AudioCtx ? new AudioCtx() : null;
-function beep(volume=0.05, frequency=440, duration=0.12){
+
+function _tone(freq, startTime, duration, type='sine', vol=0.08){
   if(!audioCtx) return;
   const o = audioCtx.createOscillator();
   const g = audioCtx.createGain();
-  o.type = 'sine'; o.frequency.value = frequency;
-  g.gain.value = volume;
+  o.type = type; o.frequency.value = freq;
+  g.gain.setValueAtTime(0, startTime);
+  g.gain.linearRampToValueAtTime(vol, startTime + 0.015);
+  g.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
   o.connect(g); g.connect(audioCtx.destination);
-  o.start();
-  setTimeout(()=>{ o.stop(); }, duration*1000);
+  o.start(startTime); o.stop(startTime + duration);
 }
 
-function playCorrect(){ beep(0.04,880,0.12); }
-function playWrong(){ beep(0.06,220,0.16); }
+// Forest fanfare — ascending honeybee sparkle (C5 E5 G5 C6)
+function playCorrect(){
+  if(!audioCtx) return;
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  const t = audioCtx.currentTime;
+  [[523,0],[659,0.09],[784,0.18],[1047,0.27]].forEach(([f,dt])=>_tone(f,t+dt,0.32,'triangle',0.09));
+  // soft shimmer underneath
+  _tone(1319,t+0.27,0.45,'sine',0.04);
+}
+
+// Bear growl — descending sawtooth rumble + low drone
+function playWrong(){
+  if(!audioCtx) return;
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  const t = audioCtx.currentTime;
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.type = 'sawtooth';
+  o.frequency.setValueAtTime(190, t);
+  o.frequency.exponentialRampToValueAtTime(62, t+0.5);
+  g.gain.setValueAtTime(0.1, t);
+  g.gain.linearRampToValueAtTime(0.14, t+0.08);
+  g.gain.exponentialRampToValueAtTime(0.001, t+0.5);
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start(t); o.stop(t+0.5);
+  _tone(78, t, 0.55, 'sine', 0.07);
+}
+
+// Shake an element using the .shake CSS class
+function shakeElement(el){
+  el.classList.remove('shake');
+  // Force reflow so the animation restarts if called twice
+  void el.offsetWidth;
+  el.classList.add('shake');
+  el.addEventListener('animationend', ()=>el.classList.remove('shake'), {once:true});
+}
 
 function updateProgress(){
   const paws = document.getElementById('paws');
@@ -191,33 +227,90 @@ function renderLevel4(main){
 }
 
 // Level 5
+const level5Questions = [
+  {q:'What is a baby tiger called?',                          opts:['Cub','Kitten','Baby'],            correct:0},
+  {q:'Which Roman word means a large area ruled by one power?', opts:['Empire','Villa','Legion'],        correct:0},
+  {q:'What do you use to hit a nail?',                        opts:['Hamerr','Hammer','Hammar'],        correct:1},
+  {q:'What do we say when we believe someone?',               opts:['Kindness','Trust','Teamwork'],     correct:1}
+];
+const level5State = { currentQ: 0 };
+
 function renderLevel5(main){
   main.innerHTML = `<h2 class="font-bold huge">Level 5 — Year 3 Bear Memories</h2>
-    <p class="mt-2">Answer the Year 3 memory questions. Then use the clue to make a word. Clue: Use the LAST letter of each correct answer. Make a word.</p>`;
-  const questions = [
-    {q:'What is a baby tiger called?', opts:['Cub','Kitten','Baby'], correct:0},
-    {q:'Which Roman word means a large area ruled by one power?', opts:['Empire','Villa','Legion'], correct:0},
-    {q:'What do you use to hit a nail', opts:['Hamerr','Hammer','Hammar'], correct:1},
-    {q:'What do we say when we believe someone?', opts:['Kindness','Trust','Teamwork'], correct:1}
-  ];
-  const area = document.createElement('div'); area.id='lvl5Area'; main.appendChild(area);
-  questions.forEach((qt,idx)=>{
-    const card = document.createElement('div'); card.className='mt-3 p-3 bg-amber-50 rounded';
-    card.innerHTML = `<div class="font-semibold">${idx+1}. ${qt.q}</div>`;
-    qt.opts.forEach((opt,i)=>{
-      const b = document.createElement('button'); b.className='mt-2 block w-full text-left p-2 bg-white rounded'; b.textContent = String.fromCharCode(65+i)+') '+opt;
-      b.addEventListener('click', ()=>{ // mark selection
-        card.querySelectorAll('button').forEach(x=>x.disabled=true);
-        if(i===qt.correct){ playCorrect(); card.classList.add('border','border-green-300'); } else { playWrong(); card.classList.add('border','border-red-300'); }
-      });
-      card.appendChild(b);
+    <p class="mt-2">Answer each memory question. Use the <strong>last letter</strong> of each correct answer to spell a 4-letter bear name.</p>
+    <div id="lvl5Area" class="mt-3"></div>`;
+  level5State.currentQ = 0;
+  renderLevel5Question();
+}
+
+function renderLevel5Question(){
+  const area = document.getElementById('lvl5Area');
+  area.innerHTML = '';
+  const idx = level5State.currentQ;
+  const qt = level5Questions[idx];
+  const total = level5Questions.length;
+
+  const card = document.createElement('div');
+  card.id = 'lvl5Card';
+  card.className = 'mt-2 p-4 bg-amber-50 rounded-lg';
+  card.innerHTML = `
+    <div class="text-sm text-gray-500 mb-2">Question ${idx+1} of ${total}</div>
+    <div class="font-semibold text-lg">${qt.q}</div>
+  `;
+
+  qt.opts.forEach((opt,i)=>{
+    const b = document.createElement('button');
+    b.className = 'mt-2 block w-full text-left p-3 bg-white rounded-lg';
+    b.textContent = String.fromCharCode(65+i)+') '+opt;
+    b.addEventListener('click', ()=>{
+      if(i===qt.correct){
+        playCorrect();
+        level5State.currentQ++;
+        if(level5State.currentQ >= total){
+          renderLevel5WordPuzzle(area);
+        } else {
+          renderLevel5Question();
+        }
+      } else {
+        playWrong();
+        const cardEl = document.getElementById('lvl5Card');
+        shakeElement(cardEl);
+        if(idx > 0){
+          // Wrong on Q2, Q3 or Q4 — reset to Q1
+          const msg = document.createElement('div');
+          msg.className = 'mt-3 p-3 rounded bg-red-100 text-red-800';
+          msg.textContent = 'The bear memories scrambled! Back to Question 1.';
+          cardEl.appendChild(msg);
+          setTimeout(()=>{
+            level5State.currentQ = 0;
+            renderLevel5Question();
+          }, 1200);
+        }
+        // Wrong on Q1 — shake only, stay on Q1
+      }
     });
-    area.appendChild(card);
+    card.appendChild(b);
   });
 
-  const hint = document.createElement('p'); hint.className='mt-4'; hint.textContent='After answering, use the letters of each correct answer to make a name, the name is 4 letters.';
-  area.appendChild(hint);
-  const label = document.createElement('label'); label.className='block mt-3'; label.textContent='Enter the bear\'s name:';
+  area.appendChild(card);
+}
+
+function renderLevel5WordPuzzle(area){
+  area.innerHTML = '';
+  const summary = document.createElement('div');
+  summary.className = 'p-4 bg-green-50 rounded-lg';
+  summary.innerHTML = `
+    <h3 class="font-bold text-green-800">All memory questions answered! 🐾</h3>
+    <p class="mt-2">Now use the <strong>last letter</strong> of each correct answer to spell a name:</p>
+    <ul class="mt-2 ml-4 list-disc text-lg">
+      <li>Cu<strong>b</strong></li>
+      <li>Empir<strong>e</strong></li>
+      <li>Hamme<strong>r</strong></li>
+      <li>Trus<strong>t</strong></li>
+    </ul>
+  `;
+  area.appendChild(summary);
+  const label = document.createElement('label'); label.className='block mt-3'; label.textContent="Enter the bear's name:";
   const input = document.createElement('input'); input.className='mt-2 p-3 w-full rounded text-lg'; input.placeholder='Type the name'; label.appendChild(input); area.appendChild(label);
   const submit = createButton('Submit', ()=>{
     const val = input.value.trim().toUpperCase();

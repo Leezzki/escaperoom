@@ -6,3 +6,13 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(#FAF7F0,#EA
 .paw { font-size: 1.6rem; }
 .kbd { background:#fff3d6; padding:6px 10px; border-radius:8px; }
 @media (max-width:768px){ .card{ margin:12px; padding:16px } .huge{font-size:1.6rem} }
+@keyframes shake {
+  0%,100% { transform: translateX(0) rotate(0deg); }
+  15%  { transform: translateX(-9px) rotate(-1.5deg); }
+  30%  { transform: translateX(9px)  rotate(1.5deg); }
+  45%  { transform: translateX(-7px) rotate(-1deg); }
+  60%  { transform: translateX(7px)  rotate(1deg); }
+  75%  { transform: translateX(-4px); }
+  90%  { transform: translateX(4px); }
+}
+.shake { animation: shake 0.55s ease-in-out; }
